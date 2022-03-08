@@ -40,7 +40,13 @@ app.post('/api/notes', (req, res) => {
     text: req.body.text,
   };
 
+  // push the note to db.json
   noteDatabase.push(newNote);
+
+  // write to the db.json file to update the database
+  fs.writeFile('./db/db.json', JSON.stringify(noteDatabase), (err) => (err ? console.log(err) : console.log('success')));
+
+  // returns the note to the client
   res.json(noteDatabase);
 });
 
