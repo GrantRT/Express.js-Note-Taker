@@ -50,4 +50,15 @@ app.post('/api/notes', (req, res) => {
   res.json(noteDatabase);
 });
 
+// DELETE /api/notes/:id should receive a query parameter that contains the id of a note to delete
+app.delete('/api/notes/:id', (req, res) => {
+  let noteId = req.params.id;
+  let index = noteDatabase.findIndex((note) => note.id === noteId);
+  let deletedNote = noteDatabase.splice(index, 1);
+  res.send(deletedNote);
+
+  // re-writes the file with updated database
+  fs.writeFile('./db/db.json', JSON.stringify(noteDatabase), (err) => (err ? console.log(err) : console.log('success')));
+});
+
 app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
