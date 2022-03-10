@@ -27,12 +27,12 @@ app.get('/notes', (req, res) => {
 
 // API Routes
 
-// GET /api/notes should read the db.json file and return all saved notes as JSON.
+// GET /api/notes read the db.json file and return all saved notes as JSON.
 app.get('/api/notes', (req, res) => {
   res.json(noteDatabase);
 });
 
-// POST /api/notes should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client.
+// POST /api/notes receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client.
 app.post('/api/notes', (req, res) => {
   const newNote = {
     id: uniqid(),
@@ -50,7 +50,7 @@ app.post('/api/notes', (req, res) => {
   res.json(noteDatabase);
 });
 
-// DELETE /api/notes/:id should receive a query parameter that contains the id of a note to delete
+// DELETE /api/notes/:id receives a query parameter that contains the id of a note to delete
 app.delete('/api/notes/:id', (req, res) => {
   let noteId = req.params.id;
   let index = noteDatabase.findIndex((note) => note.id === noteId);
